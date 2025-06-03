@@ -44,7 +44,7 @@ async function generatePdf(file, options, callback, puppeteerOptions = {}) {
 		.asCallback(callback);
 }
 
-async function generatePdfs(files, options, callback) {
+async function generatePdfs(files, options, callback, puppeteerOptions = {}) {
 	// we are using headless mode
 	let args = ["--no-sandbox", "--disable-setuid-sandbox"];
 	if (options.args) {
@@ -53,6 +53,7 @@ async function generatePdfs(files, options, callback) {
 	}
 	const browser = await puppeteer.launch({
 		args: args,
+		...puppeteerOptions,
 	});
 	let pdfs = [];
 	const page = await browser.newPage();
